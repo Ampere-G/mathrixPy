@@ -1,4 +1,4 @@
-class mathrixpy:
+class mathrix:
     def __init__(self,datos:list)-> object:   #Incializa la clase
         
         '''
@@ -39,7 +39,7 @@ class mathrixpy:
             for j in range((self.columnas)):  
                 matrix[i][j]=self.datos[i][j]+other.datos[i][j]
             
-        return mathrixpy(matrix)
+        return mathrix(matrix)
     
     def __sub__(self,other) -> object:
         '''
@@ -55,7 +55,7 @@ class mathrixpy:
             for j in range((self.columnas)):  
                 matrix[i][j]=self.datos[i][j]-other.datos[i][j]
             
-        return mathrixpy(matrix)
+        return mathrix(matrix)
      
     def prod(self,*args) -> object:
         '''
@@ -76,8 +76,8 @@ class mathrixpy:
                     for k in range(original.columnas):
                         suma+=original.datos[i][k] * matriz.datos[k][j]
                     resultado[i][j]=suma
-            original=mathrixpy(resultado)
-        return mathrixpy(resultado)
+            original=mathrix(resultado)
+        return mathrix(resultado)
     
     def scalar_mul(self,scalar:float) -> object:
         '''
@@ -90,7 +90,7 @@ class mathrixpy:
             for j in range(self.columnas):
                 matrix[i][j]=self.datos[i][j]*scalar
         
-        return mathrixpy(matrix)
+        return mathrix(matrix)
 
     def tr(self) -> float:
         '''
@@ -118,7 +118,7 @@ class mathrixpy:
             for j in range(self.columnas):
                 matrix[j][i]=self.datos[i][j]
 
-        return mathrixpy(matrix)
+        return mathrix(matrix)
     
     def mIdentidad(numFila:int) -> object:
         '''
@@ -129,7 +129,7 @@ class mathrixpy:
         for i in range(numFila):
             M[i][i]=1
             
-        return mathrixpy(M)
+        return mathrix(M)
     
     def potencia(self,potencia:int) ->object:
         '''
@@ -160,7 +160,7 @@ class mathrixpy:
                 
                 M[i][j]=datos[(numColumnas*i) + j]
         
-        return mathrixpy(M)
+        return mathrix(M)
    
     # def determinante(self:object) -> float:
         
@@ -175,8 +175,8 @@ class mathrixpy:
         '''
         Regresa una representación en cadena de la matriz
         '''
-        mathrixpySTR= '\n'.join ( '\t'.join ( map(str,fila) ) for fila in self.datos )
+        mathrixSTR= '\n'.join ( '\t'.join ( map(str,fila) ) for fila in self.datos )
         
-        return f'Matriz {self.filas}x{self.columnas}:\n{mathrixpySTR}'            
+        return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'            
 
 
