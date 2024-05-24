@@ -162,12 +162,12 @@ class mathrixpy:
         
         return mathrixpy(M)
    
-    def determinante(self:object) -> float:
+    # def determinante(self:object) -> float:
         
-        resultado=0
-        resultado2=1
-        if len(self.datos)==2:
-            return self.datos[0][0]*self.datos[1][1]-self.datos[0][1]*self.datos[1][0]
+    #     resultado=0
+    #     resultado2=1
+    #     if len(self.datos)==2:
+    #         return self.datos[0][0]*self.datos[1][1]-self.datos[0][1]*self.datos[1][0]
                    
         
           
@@ -180,16 +180,3 @@ class mathrixpy:
         return f'Matriz {self.filas}x{self.columnas}:\n{mathrixpySTR}'            
 
 
-if __name__=="__main__":
-    
-    v=mathrixpy([[1,2], 
-                [4,5]])
-    
-    z=mathrixpy( [[1], 
-                 [2],
-                 [3]])
-    
-    m=mathrixpy.listaToMatriz([1,2,3,5,4,5],2,3)
-    
-    
-    print(v.determinante())
