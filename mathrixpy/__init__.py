@@ -1,1 +1,1 @@
-from mathrixpy.mathrixpybase import *
+from mathrixpy.mathrixpybase import base
