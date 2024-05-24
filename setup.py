@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="mathrixpy",
-    version="0.6",
+    version="0.7",
     author="AmJoJADeOrg",
     license='MIT',
     author_email="glroberto1810@gmail.com",
