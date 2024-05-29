@@ -161,7 +161,8 @@ class matrizop:
                 M[i][j]=datos[(numColumnas*i) + j]
         
         return matrizop(M)
-   
+
+#Cambios  
     def extractColumna(self,numColumna)->list:
         resultado=[]
         

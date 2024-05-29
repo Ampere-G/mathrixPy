@@ -144,32 +144,30 @@ class mathrix:
             original=original.prod(self)
         return(original)
 
-    def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
+    def determinante(self:object) -> float:
         '''
-        Genera una matriz de dimensiones deseadas a partir de una lista de números
+        Calcula la determinante de una matriz - Tiene que ser cuadrada
         '''
         
-        if numFilas*numColumnas!=len(datos):
-            raise ValueError('Verificar dimensiones')
+        if self.filas!=self.columnas:
+            raise ValueError('La matriz tiene que ser cuadrada')
         
+        if self.filas==1:
+            return self.datos[0][0]
         
-        M=[[0]*numColumnas for _ in range(numFilas)]
-
-        for i in range(numFilas):
-            for j in range(numColumnas):
-                
-                M[i][j]=datos[(numColumnas*i) + j]
+        if self.filas==2:
+            return self.datos[0][0]*self.datos[1][1]-self.datos[0][1]*self.datos[1][0]
         
-        return mathrix(M)
-   
-    # def determinante(self:object) -> float:
+        det=0 
         
-    #     resultado=0
-    #     resultado2=1
-    #     if len(self.datos)==2:
-    #         return self.datos[0][0]*self.datos[1][1]-self.datos[0][1]*self.datos[1][0]
-                   
-        
+        for columna in range(self.columnas):
+            menor = [fila[:columna] + fila[columna+1:] for fila in self.datos[1:]]
+            
+            cofactor=(-1)**columna * self.datos[0][columna]*(mathrix(menor).determinante())
+            
+            det+=cofactor
+            
+        return det
           
     def __str__(self) -> str:
         '''
@@ -180,3 +178,28 @@ class mathrix:
         return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'            
 
 
+def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
+    '''
+    Genera una matriz de dimensiones deseadas a partir de una lista de números
+    '''
+    
+    if numFilas*numColumnas!=len(datos):
+        raise ValueError('Verificar dimensiones')
+    
+    
+    M=[[0]*numColumnas for _ in range(numFilas)]
+
+    for i in range(numFilas):
+        for j in range(numColumnas):
+            
+            M[i][j]=datos[(numColumnas*i) + j]
+    
+    return mathrix(M)
+
+matriz = mathrix([
+    [2, -3, 7,3],
+    [2, 0, -1,4],
+    [1, 4, 5,6],
+    [1, 6, 0,6]])
+
+print(matriz.determinante())
