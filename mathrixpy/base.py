@@ -196,10 +196,3 @@ def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
     
     return mathrix(M)
 
-matriz = mathrix([
-    [2, -3, 7,3],
-    [2, 0, -1,4],
-    [1, 4, 5,6],
-    [1, 6, 0,6]])
-
-print(matriz.determinante())
