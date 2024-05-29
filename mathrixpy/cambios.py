@@ -170,6 +170,21 @@ class matrizop:
             resultado.append(i[numColumna-1])
         return resultado
     
+    def apply_function(self, func) -> object:
+        '''
+        Aplica una función a cada elemento de la matriz
+        '''
+        matrix = [[func(self.datos[i][j]) for j in range(self.columnas)] for i in range(self.filas)]
+        return matrizop(matrix)
+    
+    def __str__(self) -> str:
+        '''
+        Regresa una representación en cadena de la matriz
+        '''
+        mathrixSTR= '\n'.join ( '\t'.join ( map(str,fila) ) for fila in self.datos )
+        
+        return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'            
+
     
 if __name__=="__main__":
     
@@ -182,5 +197,3 @@ if __name__=="__main__":
     
     m=matrizop.listaToMatriz([1,2,3,5,4,5],2,3)
     
-    
-    print(v.extractColumna(2))
