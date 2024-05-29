@@ -5,7 +5,6 @@ setup.py
 mathrixpy/__init__.py
 mathrixpy/base.py
 mathrixpy/cambios.py
-mathrixpy/pruebas.py
 mathrixpy.egg-info/PKG-INFO
 mathrixpy.egg-info/SOURCES.txt
 mathrixpy.egg-info/dependency_links.txt

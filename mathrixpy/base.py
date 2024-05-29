@@ -9,28 +9,28 @@ class mathrix:
         self.filas=len(datos) #El número de elementos de las lista de datos es igual a el numero de filas
         self.columnas=len(datos[0]) #El número de elementos de cada fila es igual al número de columnas
     
-        if not self.verificar_matriz(): 
+        if not self.__verificar_matriz(): 
             raise ValueError("Todas las filas deben tener la misma longitud")
         
-    def verificar_matriz(self) -> bool:
+    def __verificar_matriz(self:object) -> bool:
         '''
         Comprueba que la longitud de todas las filas sea la misma
         '''
         return all(len(fila)==self.columnas for fila in self.datos)
         
-    def dimension_igual(self,other) -> bool:
+    def __dimension_igual(self,other) -> bool:
         '''
         Verifica si dos matrices tienen la misma dimensión
         '''
         
         return self.filas==other.filas and self.columnas==other.columnas
     
-    def __add__(self,other) -> object:
+    def __add__(self:object,other:object) -> object:
         '''
         Suma dos matrices (Tienen que tener las mismas dimensiones)
         '''
         
-        if not self.dimension_igual(other):
+        if not self.__dimension_igual(other):
             raise ValueError('Las matrices tienen que tener las mismas dimensiones')
         
         matrix=[[0]*self.columnas for _ in range(self.filas)]
@@ -41,12 +41,12 @@ class mathrix:
             
         return mathrix(matrix)
     
-    def __sub__(self,other) -> object:
+    def __sub__(self:object,other:object) -> object:
         '''
         Resta de dos matrices (Tienen que tener las mismas dimensiones)
         '''
 
-        if not self.dimension_igual(other):
+        if not self.__dimension_igual(other):
             raise ValueError('Las matrices tienen que tener las mismas dimensiones')
         
         matrix=[[0]*self.columnas for _ in range(self.filas)]
@@ -57,7 +57,7 @@ class mathrix:
             
         return mathrix(matrix)
      
-    def prod(self,*args) -> object:
+    def prod(self:object,*args:object) -> object:
         '''
         Multiplica una matriz por otra u otras matrices
         '''
@@ -79,7 +79,7 @@ class mathrix:
             original=mathrix(resultado)
         return mathrix(resultado)
     
-    def scalar_mul(self,scalar:float) -> object:
+    def scalar_mul(self:object,scalar:float) -> object:
         '''
         Multiplica una matriz por un escalar
         '''
@@ -92,7 +92,7 @@ class mathrix:
         
         return mathrix(matrix)
 
-    def tr(self) -> float:
+    def tr(self:object) -> float:
         '''
         Devulve la suma de los elementos diagonales de una matriz cuadrada
         '''
@@ -107,7 +107,7 @@ class mathrix:
                 
         return traza
         
-    def transpuesta(self) -> object:
+    def transpuesta(self:object) -> object:
         '''
         Devuelve una matriz con los indices alrrevez
         '''
@@ -120,18 +120,7 @@ class mathrix:
 
         return mathrix(matrix)
     
-    def mIdentidad(numFila:int) -> object:
-        '''
-        Crea una matriz diagonal con solo numeros 1 de dimensiones numFila x numFila
-        '''
-        M=[[0]*numFila for _ in range(numFila)]
-        
-        for i in range(numFila):
-            M[i][i]=1
-            
-        return mathrix(M)
-    
-    def potencia(self,potencia:int) ->object:
+    def potencia(self:object,potencia:int) ->object:
         '''
         Eleva una matriz cuadrada a una potencia
         '''
@@ -169,7 +158,7 @@ class mathrix:
             
         return det
           
-    def __str__(self) -> str:
+    def __str__(self:object) -> str:
         '''
         Regresa una representación en cadena de la matriz
         '''
@@ -196,3 +185,14 @@ def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
     
     return mathrix(M)
 
+def mIdentidad(numFila:int) -> object:
+        '''
+        Crea una matriz diagonal con solo numeros 1 de dimensiones numFila x numFila
+        '''
+        M=[[0]*numFila for _ in range(numFila)]
+        
+        for i in range(numFila):
+            M[i][i]=1
+            
+        return mathrix(M)
+    
