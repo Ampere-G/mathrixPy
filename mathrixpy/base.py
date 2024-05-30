@@ -221,7 +221,7 @@ class mathrix:
         return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'         
 
 
-def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
+def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> mathrix:
     '''
     Genera una matriz de dimensiones deseadas a partir de una lista de números
     '''
@@ -239,7 +239,7 @@ def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
     
     return mathrix(M)
 
-def mIdentidad(numFila:int) -> object:
+def mIdentidad(numFila:int) -> mathrix:
         '''
         Crea una matriz diagonal con solo numeros 1 de dimensiones numFila x numFila
         '''
