@@ -25,6 +25,18 @@ class mathrix:
         
         return self.filas==other.filas and self.columnas==other.columnas
     
+    def __matriz_cuadrada_error(self:object) -> bool:
+        if self.filas!=self.columnas:
+            raise ValueError('La matriz no es cuadrada')
+        
+        return True
+    
+    def get_Datos(self:object) -> list:
+        '''
+        Regresa los datos pertenecientes a la matriz en forma de lista
+        '''
+        return self.datos
+        
     def __add__(self:object,other:object) -> object:
         '''
         Suma dos matrices (Tienen que tener las mismas dimensiones)
@@ -122,13 +134,19 @@ class mathrix:
     
     def potencia(self:object,potencia:int) ->object:
         '''
-        Eleva una matriz cuadrada a una potencia
+        Eleva una matriz cuadrada a una potencia entera
         '''
+        self.__matriz_cuadrada_error()
         
-        if potencia <1:
-            raise ValueError('La potencia tiene que ser mayor o igual que 1')
+        if potencia <-1:
+            raise ValueError('La potencia tiene que ser mayor o igual que -1')
         original=self
         
+        if potencia==0:
+            return mIdentidad(self.filas)
+        
+        if potencia==-1:
+            return self.inversa()
         for _ in range(1,potencia):
             original=original.prod(self)
         return(original)
@@ -157,14 +175,50 @@ class mathrix:
             det+=cofactor
             
         return det
-          
-    def __str__(self:object) -> str:
+    
+    def submatriz(self:object, fila:int, columna:int) -> object:
         '''
-        Regresa una representación en cadena de la matriz
+        Devuelve una submatriz excluyendo la fila y columna especificada
         '''
-        mathrixSTR= '\n'.join ( '\t'.join ( map(str,fila) ) for fila in self.datos )
+        submat = [row[:columna] + row[columna + 1:] for row in (self.datos[:fila] + self.datos[fila + 1:])]
+        return mathrix(submat)
         
-        return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'            
+    def cofactor(self:object, fila:int, columna:int) ->float :
+        '''
+        Calcula el cofactor de un elemento en la fila y columna especificada
+        '''
+        submat = self.submatriz(fila, columna)
+        return ((-1) ** (fila + columna)) * submat.determinante()
+
+    def adjunta(self:object) ->object:
+        '''
+        Devuelve la matriz adjunta de una matriz
+        '''
+        self.__matriz_cuadrada_error()
+        
+        Matrizp = [[self.cofactor(i, j) for j in range(self.columnas)] for i in range(self.filas)]
+        Adj = mathrix(Matrizp).transpuesta()
+        return Adj
+
+    def inversa(self:object) -> object:
+        
+        '''
+        Regrea la inversa de cualquier matriz cuadrada
+        '''
+        self.__matriz_cuadrada_error()
+        
+        Adjunta=self.adjunta()
+        DeterminanteI=(1/self.determinante())
+        Inversa=Adjunta.scalar_mul(DeterminanteI)
+        return Inversa
+            
+    def __str__(self: object) -> str:
+        # Calcular el ancho máximo de cada columna
+        col_widths = [max(len(str(self.datos[row][col])) for row in range(self.filas)) for col in range(self.columnas)]
+        
+        # Formatear cada fila con elementos centrados
+        mathrixSTR = '\n'.join('\t,\t'.join(f"{str(item).center(col_widths[col])}" for col, item in enumerate(fila)) for fila in self.datos)
+        return f'Matriz {self.filas}x{self.columnas}:\n{mathrixSTR}'         
 
 
 def listaToMatriz(datos:list,numFilas:int,numColumnas:int)-> object:
