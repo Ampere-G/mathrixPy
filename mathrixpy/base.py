@@ -1,5 +1,5 @@
 class mathrix:
-    def __init__(self,datos:list)-> object:   #Incializa la clase
+    def __init__(self,datos:list)-> 'mathrix':   #Incializa la clase
         
         '''
         Convierte una lista de lista a matriz
@@ -12,7 +12,7 @@ class mathrix:
         if not self.__verificar_matriz(): 
             raise ValueError("Todas las filas deben tener la misma longitud")
         
-    def __verificar_matriz(self:object) -> bool:
+    def __verificar_matriz(self:'mathrix') -> bool:
         '''
         Comprueba que la longitud de todas las filas sea la misma
         '''
@@ -25,19 +25,19 @@ class mathrix:
         
         return self.filas==other.filas and self.columnas==other.columnas
     
-    def __matriz_cuadrada_error(self:object) -> bool:
+    def __matriz_cuadrada_error(self:'mathrix') -> bool:
         if self.filas!=self.columnas:
             raise ValueError('La matriz no es cuadrada')
         
         return True
     
-    def get_Datos(self:object) -> list:
+    def get_Datos(self:'mathrix') -> list:
         '''
         Regresa los datos pertenecientes a la matriz en forma de lista
         '''
         return self.datos
         
-    def __add__(self:object,other:object) -> object:
+    def __add__(self:'mathrix',other:'mathrix') -> 'mathrix':
         '''
         Suma dos matrices (Tienen que tener las mismas dimensiones)
         '''
@@ -53,7 +53,7 @@ class mathrix:
             
         return mathrix(matrix)
     
-    def __sub__(self:object,other:object) -> object:
+    def __sub__(self:'mathrix',other:'mathrix') -> 'mathrix':
         '''
         Resta de dos matrices (Tienen que tener las mismas dimensiones)
         '''
@@ -69,7 +69,7 @@ class mathrix:
             
         return mathrix(matrix)
      
-    def prod(self:object,*args:object) -> object:
+    def prod(self:'mathrix',*args:'mathrix') -> 'mathrix':
         '''
         Multiplica una matriz por otra u otras matrices
         '''
@@ -91,7 +91,7 @@ class mathrix:
             original=mathrix(resultado)
         return mathrix(resultado)
     
-    def scalar_mul(self:object,scalar:float) -> object:
+    def scalar_mul(self:'mathrix',scalar:float) -> 'mathrix':
         '''
         Multiplica una matriz por un escalar
         '''
@@ -104,7 +104,7 @@ class mathrix:
         
         return mathrix(matrix)
 
-    def tr(self:object) -> float:
+    def tr(self:'mathrix') -> float:
         '''
         Devulve la suma de los elementos diagonales de una matriz cuadrada
         '''
@@ -119,7 +119,7 @@ class mathrix:
                 
         return traza
         
-    def transpuesta(self:object) -> object:
+    def transpuesta(self:'mathrix') -> 'mathrix':
         '''
         Devuelve una matriz con los indices alrrevez
         '''
@@ -132,7 +132,7 @@ class mathrix:
 
         return mathrix(matrix)
     
-    def potencia(self:object,potencia:int) ->object:
+    def potencia(self:'mathrix',potencia:int) ->'mathrix':
         '''
         Eleva una matriz cuadrada a una potencia entera
         '''
@@ -151,7 +151,7 @@ class mathrix:
             original=original.prod(self)
         return(original)
 
-    def determinante(self:object) -> float:
+    def determinante(self:'mathrix') -> float:
         '''
         Calcula la determinante de una matriz - Tiene que ser cuadrada
         '''
@@ -176,21 +176,21 @@ class mathrix:
             
         return det
     
-    def submatriz(self:object, fila:int, columna:int) -> object:
+    def submatriz(self:'mathrix', fila:int, columna:int) -> 'mathrix':
         '''
         Devuelve una submatriz excluyendo la fila y columna especificada
         '''
         submat = [row[:columna] + row[columna + 1:] for row in (self.datos[:fila] + self.datos[fila + 1:])]
         return mathrix(submat)
         
-    def cofactor(self:object, fila:int, columna:int) ->float :
+    def cofactor(self:'mathrix', fila:int, columna:int) ->float :
         '''
         Calcula el cofactor de un elemento en la fila y columna especificada
         '''
         submat = self.submatriz(fila, columna)
         return ((-1) ** (fila + columna)) * submat.determinante()
 
-    def adjunta(self:object) ->object:
+    def adjunta(self:'mathrix') ->'mathrix':
         '''
         Devuelve la matriz adjunta de una matriz
         '''
@@ -200,7 +200,7 @@ class mathrix:
         Adj = mathrix(Matrizp).transpuesta()
         return Adj
 
-    def inversa(self:object) -> object:
+    def inversa(self:'mathrix') -> 'mathrix':
         
         '''
         Regrea la inversa de cualquier matriz cuadrada
@@ -212,7 +212,7 @@ class mathrix:
         Inversa=Adjunta.scalar_mul(DeterminanteI)
         return Inversa
             
-    def __str__(self: object) -> str:
+    def __str__(self: 'mathrix') -> str:
         # Calcular el ancho máximo de cada columna
         col_widths = [max(len(str(self.datos[row][col])) for row in range(self.filas)) for col in range(self.columnas)]
         

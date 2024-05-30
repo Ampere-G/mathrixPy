@@ -24,14 +24,3 @@ class matrizop:
         return matrizop(matrix)
 
     
-if __name__=="__main__":
-    
-    v=matrizop([[1,2], 
-                [4,5]])
-    
-    z=matrizop( [[1], 
-                 [2],
-                 [3]])
-    
-    m=matrizop.listaToMatriz([1,2,3,5,4,5],2,3)
-    
